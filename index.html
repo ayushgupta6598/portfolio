@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayush Gupta — Backend Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--card:#16161f;--border:rgba(255,255,255,0.07);--accent:#00e5a0;--accent2:#7b61ff;--accent3:#ff6b6b;--text:#e8e8f0;--muted:#6b6b80;--dim:#2a2a3a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;cursor:none}
+.cursor{width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transition:transform .15s,background .2s;transform:translate(-50%,-50%)}
+.cursor-ring{width:36px;height:36px;border:1.5px solid rgba(0,229,160,.45);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:transform .35s cubic-bezier(.23,1,.32,1),width .3s,height .3s;transform:translate(-50%,-50%)}
+.cursor.hovered{transform:translate(-50%,-50%) scale(2.5);background:var(--accent2)}
+.cursor-ring.hovered{width:56px;height:56px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(10,10,15,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:padding .3s}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:.08em;color:var(--accent);text-decoration:none}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+#hero{min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;position:relative;overflow:hidden}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,160,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,160,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 80% at 60% 50%,black,transparent)}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.b1{width:500px;height:500px;background:rgba(0,229,160,.07);top:-100px;right:-100px;animation:bf 8s ease-in-out infinite}
+.b2{width:350px;height:350px;background:rgba(123,97,255,.06);bottom:50px;right:200px;animation:bf 11s ease-in-out infinite reverse}
+@keyframes bf{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,20px) scale(1.05)}}
+.hi{max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:1}
+.htag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.2);padding:6px 14px;border-radius:100px;margin-bottom:28px;animation:fu .7s .2s both}
+.htag::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hname{font-family:'Syne',sans-serif;font-size:clamp(3.5rem,8vw,6.5rem);font-weight:800;line-height:1;letter-spacing:-.03em;margin-bottom:12px;animation:fu .7s .35s both}
+.hname span{color:var(--accent)}
+.hrole{font-family:'DM Mono',monospace;font-size:clamp(.9rem,2vw,1.15rem);color:var(--muted);margin-bottom:28px;animation:fu .7s .5s both}
+.hrole em{color:var(--accent2);font-style:normal}
+.hbio{font-size:1.05rem;color:#9898b0;max-width:560px;line-height:1.8;margin-bottom:40px;animation:fu .7s .65s both}
+.hcta{display:flex;gap:16px;flex-wrap:wrap;animation:fu .7s .8s both}
+.hstats{display:flex;gap:40px;flex-wrap:wrap;margin-top:56px;animation:fu .7s 1s both}
+.sn{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent);display:block}
+.sl{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.bp{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.05em;padding:13px 26px;border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.bp:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,229,160,.3)}
+.bg{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);color:var(--text);font-family:'Syne',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:.05em;padding:13px 26px;border-radius:6px;text-decoration:none;transition:border-color .2s,background .2s,transform .2s}
+.bg:hover{border-color:var(--accent2);background:rgba(123,97,255,.08);transform:translateY(-2px)}
+.sw{max-width:1200px;margin:0 auto;padding:100px 48px}
+.sh{margin-bottom:56px}
+.st{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:12px}
+.stitle{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.sline{display:block;width:48px;height:3px;background:var(--accent);margin-top:16px;border-radius:2px}
+.div{height:1px;max-width:1200px;margin:0 auto;background:linear-gradient(90deg,transparent,var(--border) 30%,var(--border) 70%,transparent)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.ei{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px 36px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s,box-shadow .25s;margin-bottom:16px}
+.ei::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transition:transform .3s;transform-origin:bottom}
+.ei:hover{border-color:rgba(0,229,160,.2);transform:translateX(4px);box-shadow:-4px 0 24px rgba(0,229,160,.05)}
+.ei:hover::before{transform:scaleY(1)}
+.ei.dt::before{background:var(--accent2)}
+.ei.dt:hover{border-color:rgba(123,97,255,.2);box-shadow:-4px 0 24px rgba(123,97,255,.05)}
+.ei.pc::before{background:var(--accent3)}
+.ei.pc:hover{border-color:rgba(255,107,107,.2);box-shadow:-4px 0 24px rgba(255,107,107,.05)}
+.etop{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:4px}
+.ec{font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem}
+.ep{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);background:rgba(255,255,255,.04);padding:4px 10px;border-radius:4px;border:1px solid var(--border);white-space:nowrap}
+.er{font-size:.82rem;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:16px}
+.ei.dt .er{color:var(--accent2)}
+.ei.pc .er{color:var(--accent3)}
+.etags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.etag{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);background:rgba(255,255,255,.04);border:1px solid var(--border);padding:3px 8px;border-radius:4px}
+.ebl{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ebl li{font-size:.88rem;color:#8888a0;line-height:1.65;padding-left:18px;position:relative}
+.ebl li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.8rem}
+.ei.dt .ebl li::before{color:var(--accent2)}
+.ei.pc .ebl li::before{color:var(--accent3)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;transition:border-color .25s,transform .25s}
+.sc:hover{border-color:rgba(0,229,160,.25);transform:translateY(-4px)}
+.sci{font-size:1.5rem;margin-bottom:14px}
+.sct{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.stags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:'DM Mono',monospace;font-size:.72rem;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:5px}
+.tag.a{color:var(--accent);border-color:rgba(0,229,160,.2);background:rgba(0,229,160,.06)}
+.tag.b{color:var(--accent2);border-color:rgba(123,97,255,.2);background:rgba(123,97,255,.06)}
+.agrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.ac{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;text-decoration:none;display:flex;flex-direction:column;gap:14px;transition:border-color .25s,transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+.ac::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.ac:hover{border-color:rgba(0,229,160,.2);transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.ac:hover::before{transform:scaleX(1)}
+.al{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
+.at{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text);line-height:1.4}
+.ad{font-size:.85rem;color:var(--muted);line-height:1.7;flex:1}
+.aa{font-size:1.2rem;color:var(--accent);align-self:flex-end;transition:transform .2s}
+.ac:hover .aa{transform:translate(4px,-4px)}
+.pc-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:36px;transition:border-color .25s,transform .25s}
+.pc-card:hover{border-color:rgba(123,97,255,.3);transform:translateY(-4px)}
+.pt{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;margin-bottom:8px}
+.pp{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);margin-bottom:16px}
+.pd{color:#8888a0;font-size:.9rem;line-height:1.7;margin-bottom:20px}
+.egrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.edc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;transition:border-color .25s}
+.edc:hover{border-color:rgba(0,229,160,.2)}
+.edi{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:6px}
+.edd{font-size:.88rem;color:var(--accent);font-weight:500;margin-bottom:8px}
+.edm{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted)}
+.cc{max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:60px 48px;text-align:center;position:relative;overflow:hidden}
+.cc::before{content:'';position:absolute;top:-1px;left:20%;right:20%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent)}
+.cem{font-family:'Syne',sans-serif;font-size:clamp(1rem,2.5vw,1.3rem);font-weight:700;color:var(--accent);text-decoration:none;display:block;margin:24px 0;transition:color .2s}
+.cem:hover{color:var(--accent2)}
+.cls{display:flex;justify-content:center;gap:12px;margin-top:28px;flex-wrap:wrap}
+.cl{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.1em;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:8px 18px;border-radius:6px;transition:border-color .2s,color .2s,background .2s}
+.cl:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,229,160,.06)}
+footer{text-align:center;padding:32px 48px;border-top:1px solid var(--border);font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);letter-spacing:.08em}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--dim);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+@media(max-width:768px){nav{padding:16px 24px}#hero,.sw{padding-left:24px;padding-right:24px}.hcta{flex-direction:column}.ei{padding:24px}.cc{padding:40px 24px}}
+@media(max-width:480px){.nav-links{display:none}.hname{font-size:2.8rem}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">AG<span style="color:var(--muted)">.</span></a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#articles">Articles</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="hi">
+    <div class="htag">Available for Opportunities</div>
+    <h1 class="hname">Ayush<br><span>Gupta</span></h1>
+    <p class="hrole">Software Development Engineer II &nbsp;&middot;&nbsp; <em>Backend &amp; Microservices</em></p>
+    <p class="hbio">Backend engineer with 4+ years building scalable microservices, high-throughput distributed systems, and resilient APIs &mdash; currently at <strong style="color:var(--text)">Airtel Payments Bank</strong>, previously at Deutsche Telekom &amp; Pristyn Care.</p>
+    <div class="hcta">
+      <a href="mailto:ayushgupta6598@gmail.com" class="bp">&#9993; Get in Touch</a>
+      <a href="https://github.com/ayushgupta6598" target="_blank" rel="noopener" class="bg">GitHub</a>
+      <a href="https://linkedin.com/in/ayushgupta6598" target="_blank" rel="noopener" class="bg">LinkedIn</a>
+    </div>
+    <div class="hstats">
+      <div><span class="sn">4+</span><span class="sl">Yrs Exp</span></div>
+      <div><span class="sn">3</span><span class="sl">Companies</span></div>
+      <div><span class="sn">6+</span><span class="sl">Microservices</span></div>
+      <div><span class="sn">3</span><span class="sl">Articles</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<div class="sw" id="experience">
+  <div class="sh reveal">
+    <span class="st">// Career</span>
+    <h2 class="stitle">Work Experience</h2>
+    <span class="sline"></span>
+  </div>
+  <div class="ei reveal">
+    <div class="etop">
+      <span class="ec">Airtel Payments Bank</span>
+      <span class="ep">May 2025 &ndash; Present</span>
+    </div>
+    <div class="er">Software Development Engineer II &nbsp;&middot;&nbsp; Gurugram, IN &nbsp;&middot;&nbsp; Hybrid</div>
+    <div class="etags">
+      <span class="etag">Java</span><span class="etag">Spring Boot</span><span class="etag">Kafka</span><span class="etag">MongoDB</span><span class="etag">MySQL</span><span class="etag">Redis</span><span class="etag">AWS</span><span class="etag">Microservices</span><span class="etag">Drools</span>
+    </div>
+    <ul class="ebl">
+      <li>Contributing to a scalable cashback system within Airtel's digital payments platform, handling high-throughput transactional workflows.</li>
+      <li>Core developer alongside a software architect building a greenfield CLM (Customer Lifecycle Management) microservice from scratch.</li>
+      <li>Enabling multi-channel customer communication across Push Notifications, WhatsApp, SMS, and Email for Airtel Thanks and Airtel Payments Bank apps.</li>
+      <li>Designing resilient APIs and async processing flows with strong focus on scalability, fault tolerance, and observability.</li>
+    </ul>
+  </div>
+  <div class="ei dt reveal">
+    <div class="etop">
+      <span class="ec">Deutsche Telekom</span>
+      <span class="ep">Oct 2023 &ndash; May 2025 &nbsp;&middot;&nbsp; 1 yr 8 mos</span>
+    </div>
+    <div class="er">Software Engineer &nbsp;&middot;&nbsp; Gurugram, IN &nbsp;&middot;&nbsp; Hybrid</div>
+    <div class="etags">
+      <span class="etag">Java</span><span class="etag">Spring Boot</span><span class="etag">Python</span><span class="etag">MySQL</span><span class="etag">MongoDB</span><span class="etag">Kibana</span><span class="etag">Grafana</span><span class="etag">Docker</span><span class="etag">Kafka</span>
+    </div>
+    <ul class="ebl">
+      <li>Conceptualized and developed a centralized reporting module within the CMS for Fastest Finger First and Raffle games.</li>
+      <li>Devised deep-link functionality for OneApp admins integrating advanced targeting and segmentation from OneCMS for personalized content delivery.</li>
+      <li>Authored a flexible coupon system integrating Telekom4Friends and discount codes &mdash; drove 15% increase in customer acquisition and 20% boost in promotional redemptions.</li>
+      <li>Collaborated with cross-functional teams across 14+ countries, delivering coupon and engagement solutions at scale.</li>
+    </ul>
+  </div>
+  <div class="ei pc reveal">
+    <div class="etop">
+      <span class="ec">Pristyn Care</span>
+      <span class="ep">Oct 2021 &ndash; Oct 2023 &nbsp;&middot;&nbsp; 2 yrs 1 mo</span>
+    </div>
+    <div class="er">Associate Software Engineer &nbsp;&middot;&nbsp; Gurugram, IN &nbsp;&middot;&nbsp; On-site</div>
+    <div class="etags">
+      <span class="etag">Java</span><span class="etag">Spring Boot</span><span class="etag">MongoDB</span><span class="etag">MySQL</span><span class="etag">AWS EC2</span><span class="etag">Jenkins</span><span class="etag">Docker</span><span class="etag">SQS</span>
+    </div>
+    <ul class="ebl">
+      <li>Built backends of 3 microservices from scratch &mdash; Dental App, BeatXP Smart Watch App, and a Doctor Appointments App.</li>
+      <li>Improved messaging services using Karix, Twilio &amp; Airtel &mdash; achieved 60% reduction in operational costs.</li>
+      <li>Built auto-deploying infrastructure using Jenkins &amp; Docker, reducing resource waste by 30% and downtime by 90%.</li>
+      <li>Optimized legacy APIs, reducing response times by up to 60% across several high-traffic endpoints.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<div class="sw" id="skills">
+  <div class="sh reveal">
+    <span class="st">// Expertise</span>
+    <h2 class="stitle">Technical Skills</h2>
+    <span class="sline"></span>
+  </div>
+  <div class="sgrid">
+    <div class="sc reveal"><div class="sci">&#9881;&#65039;</div><div class="sct">Languages</div><div class="stags"><span class="tag a">Java</span><span class="tag a">Core Java</span><span class="tag">Python</span><span class="tag">SQL</span></div></div>
+    <div class="sc reveal"><div class="sci">&#128640;</div><div class="sct">Frameworks</div><div class="stags"><span class="tag a">Spring Boot</span><span class="tag a">Spring</span><span class="tag">JUnit</span><span class="tag">Mockito</span><span class="tag">REST API</span><span class="tag">Django</span><span class="tag">Feign</span></div></div>
+    <div class="sc reveal"><div class="sci">&#128451;</div><div class="sct">Databases</div><div class="stags"><span class="tag a">MySQL</span><span class="tag a">MongoDB</span><span class="tag">Redis</span><span class="tag">Aerospike</span><span class="tag">ElasticSearch</span></div></div>
+    <div class="sc reveal"><div class="sci">&#9729;&#65039;</div><div class="sct">Cloud &amp; DevOps</div><div class="stags"><span class="tag b">AWS EC2</span><span class="tag b">Docker</span><span class="tag b">Kubernetes</span><span class="tag">Jenkins</span><span class="tag">GCP</span><span class="tag">Git</span></div></div>
+    <div class="sc reveal"><div class="sci">&#128225;</div><div class="sct">Messaging &amp; Streams</div><div class="stags"><span class="tag a">Apache Kafka</span><span class="tag">AWS SQS</span><span class="tag">Drools</span></div></div>
+    <div class="sc reveal"><div class="sci">&#128301;</div><div class="sct">Observability</div><div class="stags"><span class="tag">Grafana</span><span class="tag">Kibana</span><span class="tag">Dynatrace</span><span class="tag">Resilience4j</span></div></div>
+    <div class="sc reveal"><div class="sci">&#129504;</div><div class="sct">Concepts</div><div class="stags"><span class="tag a">Microservices</span><span class="tag">Multithreading</span><span class="tag">Design Patterns</span><span class="tag">DSA</span><span class="tag">Async Programming</span><span class="tag">OAuth2</span></div></div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<div class="sw" id="articles">
+  <div class="sh reveal">
+    <span class="st">// Writing</span>
+    <h2 class="stitle">Technical Articles</h2>
+    <span class="sline"></span>
+  </div>
+  <div class="agrid">
+    <a href="https://medium.com/@ayushgupta6598/building-a-vendor-agnostic-communication-middleware-customer-lifecycle-management-with-strategy-1c88cc564316" target="_blank" rel="noopener" class="ac reveal">
+      <span class="al">Medium &middot; Spring Boot</span>
+      <div class="at">Building a Vendor-Agnostic Communication Middleware with Strategy &amp; Factory Patterns</div>
+      <div class="ad">A deep-dive into CLM architecture &mdash; decoupling vendor logic with Strategy &amp; Factory patterns, dynamic PayloadMapper systems, and Proxy pattern for external Bank API integration.</div>
+      <span class="aa">&#8599;</span>
+    </a>
+    <a href="https://medium.com/deutsche-telekom-gurgaon/seamless-token-refresh-for-third-party-services-in-spring-boot-4ca135133319" target="_blank" rel="noopener" class="ac reveal">
+      <span class="al">Medium &middot; OAuth2</span>
+      <div class="at">Seamless Token Refresh for Third-Party Services in Spring Boot</div>
+      <div class="ad">Tackling authentication failures with automated OAuth2 token refresh &mdash; defining client properties, automating updates, and streamlining error handling with Feign clients.</div>
+      <span class="aa">&#8599;</span>
+    </a>
+    <a href="https://medium.com/deutsche-telekom-gurgaon/downloading-reports-using-octet-stream-in-java-2f319fb1e213" target="_blank" rel="noopener" class="ac reveal">
+      <span class="al">Medium &middot; Java</span>
+      <div class="at">Efficiently Handling Large File Downloads with Octet Stream in Java</div>
+      <div class="ad">Streaming large reports (CSVs) directly to the client using Java octet streams and StreamingResponseBody in Spring Boot &mdash; without overloading server memory.</div>
+      <span class="aa">&#8599;</span>
+    </a>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<div class="sw" id="projects">
+  <div class="sh reveal">
+    <span class="st">// Built</span>
+    <h2 class="stitle">Projects</h2>
+    <span class="sline"></span>
+  </div>
+  <div class="pc-card reveal">
+    <div class="pt">Circuit Breaker &amp; Alert Management System</div>
+    <div class="pp">Oct 2023 &ndash; Nov 2023 &nbsp;&middot;&nbsp; Gurugram, IN</div>
+    <div class="pd">Designed a resilient circuit breaker solution using Resilience4j, reducing downstream API failure rates by 20% and improving overall service reliability. Integrated Grafana and Kibana dashboards for real-time alerting and observability.</div>
+    <div class="stags"><span class="tag a">Java</span><span class="tag a">Spring Boot</span><span class="tag">Resilience4j</span><span class="tag">Feign Client</span><span class="tag">Grafana</span><span class="tag">Kibana</span></div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<div class="sw" id="education">
+  <div class="sh reveal">
+    <span class="st">// Background</span>
+    <h2 class="stitle">Education</h2>
+    <span class="sline"></span>
+  </div>
+  <div class="egrid">
+    <div class="edc reveal">
+      <div class="edi">Dr. A.P.J. Abdul Kalam Technical University</div>
+      <div class="edd">B.Tech, Information Technology</div>
+      <div class="edm">Galgotias College of Engineering &amp; Technology &nbsp;&middot;&nbsp; 2017&ndash;2021 &nbsp;&middot;&nbsp; Greater Noida</div>
+    </div>
+    <div class="edc reveal">
+      <div class="edi">City Montessori School</div>
+      <div class="edd">10+2, PCM</div>
+      <div class="edm">Lucknow, India &nbsp;&middot;&nbsp; 2008&ndash;2016</div>
+    </div>
+  </div>
+  <div style="margin-top:28px" class="reveal">
+    <div class="etags">
+      <span class="etag">Hacktoberfest &mdash; 7 PRs merged</span>
+      <span class="etag">Dextrix Hackathon &mdash; Top 5 Teams</span>
+      <span class="etag">CodeChef 2 Star</span>
+      <span class="etag">HackerRank Java (Basic) Certified</span>
+      <span class="etag">Udemy: JUnit &amp; Mockito Mastery</span>
+      <span class="etag">Google Kick Start</span>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<div class="sw" id="contact">
+  <div class="cc reveal">
+    <span class="st" style="text-align:center">// Let's Connect</span>
+    <h2 class="stitle" style="font-size:2rem;margin-top:8px">Open to Opportunities</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-top:16px;line-height:1.8">Currently open to backend engineering roles. Feel free to reach out for collaborations, opportunities, or just a technical chat.</p>
+    <a href="mailto:ayushgupta6598@gmail.com" class="cem">ayushgupta6598@gmail.com</a>
+    <div class="cls">
+      <a href="https://github.com/ayushgupta6598" target="_blank" rel="noopener" class="cl">GitHub</a>
+      <a href="https://linkedin.com/in/ayushgupta6598" target="_blank" rel="noopener" class="cl">LinkedIn</a>
+      <a href="https://leetcode.com/u/ayushgupta6598/" target="_blank" rel="noopener" class="cl">LeetCode</a>
+      <a href="tel:+918840198295" class="cl">+91 88401 98295</a>
+    </div>
+  </div>
+</div>
+
+<footer>Designed &amp; built by Ayush Gupta &nbsp;&middot;&nbsp; <span style="color:var(--accent);font-family:'DM Mono',monospace">Gurugram, India</span> &nbsp;&middot;&nbsp; 2026</footer>
+
+<script>
+var cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing'),mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,.ei,.sc,.ac,.pc-card,.edc').forEach(function(el){
+  el.addEventListener('mouseenter',function(){cursor.classList.add('hovered');ring.classList.add('hovered')});
+  el.addEventListener('mouseleave',function(){cursor.classList.remove('hovered');ring.classList.remove('hovered')})
+});
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+window.addEventListener('scroll',function(){document.getElementById('navbar').style.padding=window.scrollY>40?'12px 48px':'20px 48px'});
+</script>
+</body>
+</html>
